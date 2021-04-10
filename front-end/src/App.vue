@@ -51,4 +51,13 @@
   
 }
 
+.large-input {
+  display: block;
+  width: 400px;
+  margin: 0 auto;
+  font-size: 25px;
+
+  
+}
+
 </style>

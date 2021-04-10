@@ -3,15 +3,15 @@
     <h1 class="module-title">Company and Team information</h1>
     <div class="company-title">
       <h2 class="company-edit">Add your company name</h2>
-      <input v-model="moduleData.companyName" />
+      <input class="large-input" v-model="moduleData.companyName" />
     </div>
     <div class="team-title">
       <h2 class="team-edit">What team is hiring?</h2>
-      <input v-model="moduleData.teamName" />
+      <input class="large-input" v-model="moduleData.teamName" />
     </div>
     <div class="role-title">
       <h2 class="role-edit">What role are you hiring for?</h2>
-      <input v-model="moduleData.roleName" />
+      <input class="large-input" v-model="moduleData.roleName" />
     </div>
     <div class="role-intro-video">
       <h2 class="video-edit">Upload a team introduction video</h2>
@@ -25,7 +25,7 @@
 
     <div class="role-description">
       <h2 class="description-edit">Describe the day to day operation of this team</h2>
-      <textarea v-model="moduleData.roleDescription" />
+      <textarea class="large-textarea" v-model="moduleData.roleDescription" />
     </div>
   </div>
 </template>

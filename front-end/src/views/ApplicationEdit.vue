@@ -5,12 +5,15 @@
     </div>
     <div class="company-info" v-if="company">
       <h2 class="company-name">{{ company.companyName }}</h2>
-      <button class="logout" @click="logout" >
-        Logout
-      </button>
+      <button class="logout" @click="logout">Logout</button>
     </div>
-    <h2>Application name:</h2>
-    <input v-model="applicationName" />
+
+    <div class="naming-info">
+      <h2 class="app-name">Application name:</h2>
+      <div class="input-wrap">
+        <input class="large-input name-input" v-model="applicationName" />
+      </div>
+    </div>
     <info-module-edit :moduleData="infoModuleEdit" />
     <component
       v-for="comp in this.modules"
@@ -167,10 +170,25 @@ export default {
   grid-template: auto / 1fr 1fr;
   justify-items: center;
   align-items: center;
-
 }
-.company-name, .logout {
+.company-name,
+.logout {
   width: fit-content;
   height: fit-content;
+}
+.name-input {
+  margin: 0 auto;
+}
+
+.naming-info {
+  background-color: #86c232;
+  margin-bottom: 20px;
+}
+
+.input-wrap {
+  width: fit-content;
+  height: fit-content;
+  margin: 0 auto;
+  padding-bottom: 10px;
 }
 </style>
