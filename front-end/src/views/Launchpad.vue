@@ -1,7 +1,7 @@
 <template>
   <div class="launchpad">
     <h2 class="company-name" v-if="company">
-      Logged in as: {{ company.companyName }}
+      <div class="logged-in">Logged in as: {{ company.companyName }}</div>
       <button @click="logout" class="pure-button pure-button-primary">
         Logout
       </button>
@@ -11,7 +11,7 @@
       v-for="application in this.applications"
       :key="application.id"
     >
-      <p>{{ application.applicationName }}</p>
+      <p class="application-name">{{ application.applicationName }}</p>
       <button class="edit" @click="editApplication(application._id)">
         Edit
       </button>
@@ -19,7 +19,7 @@
         Delete
       </button>
       <div class="link-box">
-        <h2>Copy this link and paste it in the application</h2>
+        <h2 class="copy-link-words">Copy this link and paste it in the application</h2>
       <p class="shareable-link">{{ getSharableLink(application._id) }}</p>
       </div>
     </div>
@@ -41,24 +41,46 @@
     color: #222629;
     display: flex;
     font-size: 3rem;
+    display: flex;
   }
 
   .company-name {
+    
     display: flex;
     justify-content: center;
-    align-items: center;
     color: #6B6E70;
-    padding-left: 3rem;
+    padding-left: 5rem;
+    padding-top: 5rem;
+  }
+
+  .logged-in {
+    padding: 2rem;
+    background-color: #86C232;
+    border-radius: 8px;
+    
   }
 
   .link-box {
     background-color: #86C232;
     color: #222629;
     padding: 3rem;
+    border-left: 0;
     border-radius: 8px;
+    display: flex;
+    margin-top: 10rem;
   }
 
+  .copy-link-words {
+    display: flex;
+    align-self: center;
+  }
 
+.application-name {
+  font-size: 5rem;
+  color: #61892F;
+  border: 20px #6B6E70;
+  font-weight: bold;
+}
   
   .application-box {
     font-size: 1.5rem;
@@ -87,6 +109,8 @@
   border-radius: 8px;
   font-size: 2.5rem;
   border: 1px;
+  box-shadow: 0px 0px 2px 0px;
+  transition: .3s;
 }
   .edit, .delete, .create-application {
     justify-self: center;
