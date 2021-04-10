@@ -1,14 +1,14 @@
 <template>
   <div class="application-edit">
     <div id="nav">
-      <router-link to="/launchpad">Launchpad</router-link>
+      <router-link to="/launchpad">Return to Launchpad</router-link>
     </div>
-    <h2 v-if="company">
-      Logged in as: {{ company.companyName }}
-      <button @click="logout" class="pure-button pure-button-primary">
+    <div class="company-info" v-if="company">
+      <h2 class="company-name">{{ company.companyName }}</h2>
+      <button class="logout" @click="logout" >
         Logout
       </button>
-    </h2>
+    </div>
     <h2>Application name:</h2>
     <input v-model="applicationName" />
     <info-module-edit :moduleData="infoModuleEdit" />
@@ -22,7 +22,7 @@
     <button @click="addMultipleChoiceModuleEdit">Add Multiple Choice</button>
     <button @click="addCodingQuestionEdit">Add Coding Question</button>
     <button @click="addFileUploadEdit">Add File Upload Question</button>
-    <button @click="submit">{{submitText}}</button>
+    <button @click="submit">{{ submitText }}</button>
   </div>
 </template>
 
@@ -65,14 +65,14 @@ export default {
         return "Save Changes";
       }
       return "Publish";
-    }
+    },
   },
   async created() {
     try {
       let response = await axios.get("/api/companies");
       this.$root.$data.company = response.data.company;
       if (this.$root.$data.applicationToEditID.length > 0) {
-        console.log('found to edit ID');
+        console.log("found to edit ID");
         await this.setApplicationData();
       }
     } catch (error) {
@@ -84,7 +84,9 @@ export default {
   methods: {
     async setApplicationData() {
       try {
-        let response = await axios.get(`/api/companies/${this.company._id}/applications/${this.$root.$data.applicationToEditID}`);
+        let response = await axios.get(
+          `/api/companies/${this.company._id}/applications/${this.$root.$data.applicationToEditID}`
+        );
         console.log(response);
         this.applicationName = response.data.applicationName;
         this.modules = response.data.modules;
@@ -109,7 +111,7 @@ export default {
           applicationName: this.applicationName,
           infoModule: this.infoModuleEdit,
           modules: this.modules,
-          ifEditThenApplicationIDIs: this.$root.$data.applicationToEditID
+          ifEditThenApplicationIDIs: this.$root.$data.applicationToEditID,
         });
         this.$router.push({ name: "Launchpad" });
       } catch (error) {
@@ -158,3 +160,17 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.company-info {
+  display: grid;
+  grid-template: auto / 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+
+}
+.company-name, .logout {
+  width: fit-content;
+  height: fit-content;
+}
+</style>
