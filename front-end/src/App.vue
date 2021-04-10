@@ -35,10 +35,20 @@
   width: 90%;
   margin: 0 auto;
   background-color: #86c232;
+  margin-bottom: 20px;
 }
 
 .module-content {
   padding: 20px;
+}
+.large-textarea {
+  display: block;
+  width: 75%;
+  height: 200px;
+  font-size: 20px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  
 }
 
 </style>

@@ -64,10 +64,5 @@ export default {
   outline: none;
 }
 
-.large-textarea {
-  width: 75%;
-  height: 200px;
-  font-size: 20px;
-  margin-bottom: 10px;
-}
+
 </style>
