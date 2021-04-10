@@ -26,4 +26,15 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+
+.module-wrap {
+  width: 90%;
+  margin: 0 auto;
+  background-color: #86c232;
+}
+
+.module-content {
+  padding: 20px;
+}
+
 </style>

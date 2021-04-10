@@ -1,14 +1,16 @@
 <template>
-  <div class="coding-question-edit">
-    <h1 class="title">Coding Question</h1>
-    <h2 class="question-edit">Describe your question</h2>
-    <input v-model="moduleData.questionDescription" />
-    <prism-editor
-      class="my-editor"
-      v-model="code"
-      :highlight="highlighter"
-      line-numbers
-    ></prism-editor>
+  <div class="coding-question-edit module-wrap">
+    <div class="module-content">
+      <h1 class="title">Coding Question</h1>
+      <h2 class="question-edit">Describe your question:</h2>
+      <textarea placeholder="Your question here..." class="large-textarea" v-model="moduleData.questionDescription" />
+      <prism-editor
+        class="my-editor"
+        v-model="code"
+        :highlight="highlighter"
+        line-numbers
+      ></prism-editor>
+    </div>
   </div>
 </template>
 
@@ -28,7 +30,7 @@ export default {
     PrismEditor,
   },
   data: () => ({
-    code: '\n\n\n\n\n\n\n\n\n',
+    code: "\n\n\n\n\n\n\n\n\n",
   }),
   methods: {
     highlighter(code) {
@@ -53,10 +55,19 @@ export default {
   font-size: 14px;
   line-height: 1.5;
   padding: 5px;
+  width: 90%;
+  margin: 0 auto;
 }
 
 /* optional class for removing the outline */
 .prism-editor__textarea:focus {
   outline: none;
+}
+
+.large-textarea {
+  width: 75%;
+  height: 200px;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 </style>
