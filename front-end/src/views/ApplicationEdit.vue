@@ -14,8 +14,9 @@
         <input class="large-input name-input" v-model="applicationName" />
       </div>
     </div>
-    <info-module-edit :moduleData="infoModuleEdit" />
+    <info-module-edit class="info" :moduleData="infoModuleEdit" />
     <component
+      class="component"
       v-for="comp in this.modules"
       :key="comp.id"
       v-bind:is="comp.component"
@@ -190,5 +191,13 @@ export default {
   height: fit-content;
   margin: 0 auto;
   padding-bottom: 10px;
+}
+
+.component {
+  margin-bottom: 20px;
+}
+
+.info {
+  margin-bottom: 20px;
 }
 </style>
