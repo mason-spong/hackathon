@@ -17,6 +17,45 @@
   </div>
 </template>
 
+<style scoped>
+  .launchpad {
+    background-color: white;
+    color: #222629;
+    display: flex;
+    font-size: 3rem;
+  }
+  .application-box {
+    font-size: 1.5rem;
+    padding: 1rem;
+    margin: 0 1rem;
+  }
+
+.edit {
+  margin: 1rem;
+}
+
+.delete {
+  margin: 1rem;
+}
+
+.create-application {
+  margin: 1rem;
+}
+  .edit, .delete, .create-application {
+    justify-self: center;
+    background-color: #86C232;
+    color: #222629;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1rem;
+    font-size: 2.5rem;
+  }
+  
+
+
+
+</style>
+
 <script>
 // import axios from "axios";
 import axios from "axios";

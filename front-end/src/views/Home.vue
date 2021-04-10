@@ -41,6 +41,23 @@
   </div>
 </template>
 
+<style scoped>
+  .home {
+    background-color: white;
+    color: #222629;
+    display: flex;
+  }
+  .pure-form {
+    font-size: 1.5rem;
+    padding: 1rem;
+    margin: 0 1rem;
+  }
+  
+
+
+
+</style>
+
 <script>
 import axios from "axios";
 export default {
