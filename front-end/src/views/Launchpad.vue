@@ -1,5 +1,11 @@
 <template>
   <div class="launchpad">
+    <h2 v-if="company">
+      Logged in as: {{ company.companyName }}
+      <button @click="logout" class="pure-button pure-button-primary">
+        Logout
+      </button>
+    </h2>
     <h1>HI</h1>
     <div
       class="application-box"
@@ -84,6 +90,16 @@ export default {
     };
   },
   methods: {
+    async logout() {
+      try {
+        await axios.delete("/api/companies");
+        this.$root.$data.company = null;
+        this.$router.push({ name: "Home" });
+      } catch (error) {
+        this.$root.$data.company = null;
+        this.$router.push({ name: "Home" });
+      }
+    },
     getSharableLink(applicationID) {
       var path = this.$router.resolve({name: 'Application'}).href; 
       var fullUrl = window.location.origin + path + `?companyID=${this.company._id}&applicationID=${applicationID}`;
