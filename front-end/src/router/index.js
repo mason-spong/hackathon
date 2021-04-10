@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import ApplicationEdit from '../views/ApplicationEdit.vue'
 import Application from '../views/Application.vue'
 import Launchpad from '../views/Launchpad.vue'
+import ThankYou from '../views/ThankYou.vue'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,11 @@ const routes = [
     path: '/launchpad',
     name: 'Launchpad',
     component: Launchpad
+  },
+  {
+    path: '/thankyou',
+    name: 'ThankYou',
+    component: ThankYou
   },
 ]
 

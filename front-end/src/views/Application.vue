@@ -9,6 +9,7 @@
         :moduleData="comp"
       ></component>
     </div>
+    <button @click="submit">Submit</button>
   </div>
 </template>
 
@@ -36,6 +37,9 @@ export default {
     this.getApplication();
   },
   methods: {
+    submit() {
+      this.$router.push({ name: "ThankYou" });
+    },
     async getApplication() {
       try {
         const response = await axios.get(

@@ -1,62 +1,57 @@
 <template>
   <div class="home">
-    <form class="pure-form">
-      <fieldset>
-        <legend>Register for an account</legend>
-        <input placeholder="company name" v-model="companyName" />
-      </fieldset>
-      <fieldset>
-        <input placeholder="username" v-model="username" />
-        <input type="password" placeholder="password" v-model="password" />
-      </fieldset>
-      <fieldset>
-        <button
-          type="submit"
-          class="pure-button pure-button-primary"
-          @click.prevent="register"
-        >
-          Register
-        </button>
-      </fieldset>
-    </form>
-    <p v-if="error" class="error">{{ error }}</p>
-
-    <form class="pure-form">
-      <fieldset>
-        <legend>Login</legend>
-        <input placeholder="username" v-model="usernameLogin" />
-        <input type="password" placeholder="password" v-model="passwordLogin" />
-      </fieldset>
-      <fieldset>
-        <button
-          type="submit"
-          class="pure-button pure-button-primary"
-          @click.prevent="login"
-        >
-          Login
-        </button>
-      </fieldset>
-    </form>
-    <p v-if="errorLogin" class="error">{{ errorLogin }}</p>
+    <div class="reg-log-wrap">
+      <div class="login-wrap">
+        <form class="pure-form">
+          <fieldset>
+            <legend>Login</legend>
+            <input placeholder="username" v-model="usernameLogin" />
+            <input
+              type="password"
+              placeholder="password"
+              v-model="passwordLogin"
+            />
+          </fieldset>
+          <fieldset>
+            <button
+              type="submit"
+              class="pure-button pure-button-primary"
+              @click.prevent="login"
+            >
+              Login
+            </button>
+          </fieldset>
+        </form>
+      </div>
+      <p v-if="errorLogin" class="error">{{ errorLogin }}</p>
+      <div class="register-wrap">
+        <form class="pure-form">
+          <fieldset>
+            <legend>Register for an account</legend>
+            <input placeholder="company name" v-model="companyName" />
+          </fieldset>
+          <fieldset>
+            <input placeholder="username" v-model="username" />
+            <input type="password" placeholder="password" v-model="password" />
+          </fieldset>
+          <fieldset>
+            <button
+              type="submit"
+              class="pure-button pure-button-primary"
+              @click.prevent="register"
+            >
+              Register
+            </button>
+          </fieldset>
+        </form>
+      </div>
+      <p v-if="error" class="error">{{ error }}</p>
+      
+    </div>
   </div>
 </template>
 
-<style scoped>
-  .home {
-    background-color: white;
-    color: #222629;
-    display: flex;
-  }
-  .pure-form {
-    font-size: 1.5rem;
-    padding: 1rem;
-    margin: 0 1rem;
-  }
-  
 
-
-
-</style>
 
 <script>
 import axios from "axios";
@@ -121,3 +116,22 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.home {
+  background-color: white;
+  color: #222629;
+  width: fit-content;
+  margin: 0 auto;
+}
+.pure-form {
+  font-size: 1.5rem;
+  padding: 1rem;
+  margin: 0 1rem;
+}
+
+.reg-log-wrap {
+  display: grid;
+  grid-template: auto / 1fr 1fr;
+}
+</style>
