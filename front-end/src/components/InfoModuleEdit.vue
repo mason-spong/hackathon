@@ -25,7 +25,7 @@
 
     <div class="role-desctription">
       <h2 class="description-edit">Describe the day to day operation of this team</h2>
-      <input v-model="moduleData.roleDescription" />
+      <textarea v-model="moduleData.roleDescription" />
     </div>
   </div>
 </template>
@@ -52,10 +52,6 @@ export default {
         const formData = new FormData();
         formData.append("video", this.file, this.file.name);
         let r1 = await axios.post("/api/videos", formData);
-        // let r2 = await axios.post('/api/items', {
-        //   title: this.title,
-        //   path: r1.data.path
-        // });
         console.log(r1.data.path);
         this.moduleData.introVideoPath = r1.data.path;
       } catch (error) {

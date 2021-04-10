@@ -7,31 +7,37 @@
       </button>
     </h2>
     <info-module-edit :moduleData="infoModuleEdit" />
-    <free-response-question />
+    <component v-for="comp in this.modules" :key="comp.id" v-bind:is="comp.component" :moduleData="comp"></component>
+    <button @click="addFreeResponseModuleEdit">Add free response</button>
+    <button @click="addMultipleChoiceModuleEdit">Add Multiple Choice</button>
     <button @click="submit">Publish Application</button>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-import FreeResponseQuestion from "@/components/FreeResponseQuestion.vue";
+// import FreeResponseQuestion from "@/components/FreeResponseQuestion.vue";
 import InfoModuleEdit from "../components/InfoModuleEdit.vue";
+import FreeResponseQuestionEdit from '../components/FreeResponseQuestionEdit.vue';
+import MultipleChoiceQuestionEdit from '../components/MultipleChoiceQuestionEdit.vue';
 export default {
   name: "Application",
   components: {
-    FreeResponseQuestion,
     InfoModuleEdit,
+    FreeResponseQuestionEdit,
+    MultipleChoiceQuestionEdit
   },
   data() {
     return {
+      modules: [],
       infoModuleEdit: {
-          introVideoPath: "",
-          companyName: "",
-          teamName: "",
-          roleName: "",
-          roleDescription: ""
-        }
-    }
+        introVideoPath: "",
+        companyName: "",
+        teamName: "",
+        roleName: "",
+        roleDescription: "",
+      },
+    };
   },
   computed: {
     company() {
@@ -61,11 +67,38 @@ export default {
       try {
         await axios.post(`/api/companies/${this.company._id}/applications`, {
           infoModule: this.infoModuleEdit,
+          modules: this.modules
         });
-        
       } catch (error) {
         console.log(error);
       }
+    },
+    addFreeResponseModuleEdit() {
+      this.modules.push({
+        component: 'FreeResponseQuestionEdit',
+        questionDescription: ""
+      })
+    },
+    addMultipleChoiceModuleEdit() {
+      this.modules.push({
+        component: 'MultipleChoiceQuestionEdit',
+        questionDescription: "",
+        correctIndex: null,
+        choices: [
+          {
+            question: "",
+          },
+          {
+            question: "",
+          },
+          {
+            question: "",
+          },
+          {
+            question: "",
+          }
+        ]
+      })
     }
   },
 };

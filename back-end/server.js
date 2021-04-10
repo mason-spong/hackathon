@@ -229,7 +229,8 @@ const applicationSchema = new mongoose.Schema({
     roleName: String,
     roleDescription: String,
     introVideoPath: String
-  }
+  },
+  modules: []
 });
 
 const Company = new mongoose.model('Company', companySchema);
@@ -258,7 +259,8 @@ app.post('/api/companies/:companyID/applications', async (req, res) => {
 
   const application = new Application({
     company: company,
-    infoModule: req.body.infoModule
+    infoModule: req.body.infoModule,
+    modules: req.body.modules
   });
   try {
     await application.save();
