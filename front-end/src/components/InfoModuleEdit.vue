@@ -23,7 +23,7 @@
       ></vue-core-video-player>
     </div>
 
-    <div class="role-desctription">
+    <div class="role-description">
       <h2 class="description-edit">Describe the day to day operation of this team</h2>
       <textarea v-model="moduleData.roleDescription" />
     </div>

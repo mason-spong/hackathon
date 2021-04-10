@@ -6,7 +6,8 @@ import VueCoreVideoPlayer from 'vue-core-video-player'
 Vue.config.productionTip = false
 Vue.use(VueCoreVideoPlayer)
 let data = {
-  company: null
+  company: null,
+  applicationToEditID: ""
 }
 
 new Vue({

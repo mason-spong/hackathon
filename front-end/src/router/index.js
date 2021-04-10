@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
+import ApplicationEdit from '../views/ApplicationEdit.vue'
 import Application from '../views/Application.vue'
+import Launchpad from '../views/Launchpad.vue'
 
 Vue.use(VueRouter)
 
@@ -20,9 +22,19 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
+    path: '/application/edit',
+    name: 'ApplicationEdit',
+    component: ApplicationEdit
+  },
+  {
     path: '/application',
     name: 'Application',
     component: Application
+  },
+  {
+    path: '/launchpad',
+    name: 'Launchpad',
+    component: Launchpad
   },
 ]
 

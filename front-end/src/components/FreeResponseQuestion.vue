@@ -1,8 +1,7 @@
 <template>
-  <div class="free-response-question-edit">
+  <div class="free-response-question">
     <h1 class="title">Free Response</h1>
-    <h2 class="question-edit">Describe your question</h2>
-    <input class="question" v-model="moduleData.questionDescription" />
+    <h2 class="question">{{moduleData.questionDescription}}</h2>
     <textarea class="essay-answer" placeholder="Applicants answer will go here"/>
 
   </div>
@@ -10,7 +9,7 @@
 
 <script>
 export default {
-  name: 'FreeResponseQuestionEdit',
+  name: 'FreeResponseQuestion',
   props: {
     moduleData: Object
   }

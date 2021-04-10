@@ -1,105 +1,56 @@
 <template>
   <div class="application">
-    <h2 v-if="company">
-      Logged in as: {{ company.companyName }}
-      <button @click="logout" class="pure-button pure-button-primary">
-        Logout
-      </button>
-    </h2>
-    <info-module-edit :moduleData="infoModuleEdit" />
-    <component v-for="comp in this.modules" :key="comp.id" v-bind:is="comp.component" :moduleData="comp"></component>
-    <button @click="addFreeResponseModuleEdit">Add free response</button>
-    <button @click="addMultipleChoiceModuleEdit">Add Multiple Choice</button>
-    <button @click="submit">Publish Application</button>
+    <div v-if="this.app != null">
+      <info-module :moduleData="this.app.infoModule" />
+      <component
+        v-for="comp in this.app.modules"
+        :key="comp.id"
+        v-bind:is="comp.component"
+        :moduleData="comp"
+      ></component>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
-// import FreeResponseQuestion from "@/components/FreeResponseQuestion.vue";
-import InfoModuleEdit from "../components/InfoModuleEdit.vue";
-import FreeResponseQuestionEdit from '../components/FreeResponseQuestionEdit.vue';
-import MultipleChoiceQuestionEdit from '../components/MultipleChoiceQuestionEdit.vue';
+import InfoModule from "../components/InfoModule.vue";
+import MultipleChoiceQuestion from "../components/MultipleChoiceQuestion.vue";
+import CodingQuestion from "../components/CodingQuestion.vue";
+import FileUpload from "../components/FileUpload.vue";
+import FreeResponseQuestion from "../components/FreeResponseQuestion.vue";
+
 export default {
+  components: { InfoModule,
+  MultipleChoiceQuestion,
+  CodingQuestion,
+  FileUpload,
+  FreeResponseQuestion },
   name: "Application",
-  components: {
-    InfoModuleEdit,
-    FreeResponseQuestionEdit,
-    MultipleChoiceQuestionEdit
-  },
   data() {
     return {
-      modules: [],
-      infoModuleEdit: {
-        introVideoPath: "",
-        companyName: "",
-        teamName: "",
-        roleName: "",
-        roleDescription: "",
-      },
+      app: null,
     };
   },
-  computed: {
-    company() {
-      return this.$root.$data.company;
-    },
-  },
-  async created() {
-    try {
-      let response = await axios.get("/api/companies");
-      this.$root.$data.company = response.data.company;
-    } catch (error) {
-      this.$root.$data.company = null;
-    }
+  created() {
+    this.getApplication();
   },
   methods: {
-    async logout() {
+    async getApplication() {
       try {
-        await axios.delete("/api/companies");
-        this.$root.$data.company = null;
-        this.$router.push({ name: "Home" });
-      } catch (error) {
-        this.$root.$data.company = null;
-        this.$router.push({ name: "Home" });
-      }
-    },
-    async submit() {
-      try {
-        await axios.post(`/api/companies/${this.company._id}/applications`, {
-          infoModule: this.infoModuleEdit,
-          modules: this.modules
+        const response = await axios.get(
+          `/api/companies/${this.$route.query.companyID}/applications/${this.$route.query.applicationID}`
+        );
+        console.log(response.data);
+        response.data.modules = response.data.modules.map((mod) => {
+          mod.component = mod.component.slice(0, mod.component.length - 4);
+          return mod;
         });
+        this.app = response.data;
       } catch (error) {
         console.log(error);
       }
     },
-    addFreeResponseModuleEdit() {
-      this.modules.push({
-        component: 'FreeResponseQuestionEdit',
-        questionDescription: ""
-      })
-    },
-    addMultipleChoiceModuleEdit() {
-      this.modules.push({
-        component: 'MultipleChoiceQuestionEdit',
-        questionDescription: "",
-        correctIndex: null,
-        choices: [
-          {
-            question: "",
-          },
-          {
-            question: "",
-          },
-          {
-            question: "",
-          },
-          {
-            question: "",
-          }
-        ]
-      })
-    }
   },
 };
 </script>

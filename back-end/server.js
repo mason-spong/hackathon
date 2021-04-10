@@ -12,6 +12,13 @@ const upload = multer({
   }
 });
 
+const uploadFile = multer({
+  dest: '../front-end/public/files/',
+  limits: {
+    fileSize: 100000000
+  }
+});
+
 // setup express
 const app = express();
 
@@ -24,11 +31,11 @@ app.use(cookieParser());
 
 
 app.use(cookieSession({
-    name: 'session',
-    keys: ['secretValue'],
-    cookie: {
-      maxAge: 24 * 60 * 60 * 1000 // 24 hours
-    }
+  name: 'session',
+  keys: ['secretValue'],
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000 // 24 hours
+  }
 }));
 
 // connect to the mongodb database
@@ -223,6 +230,7 @@ const applicationSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'Company'
   },
+  applicationName: String,
   infoModule: {
     companyName: String,
     teamName: String,
@@ -250,6 +258,20 @@ const Application = new mongoose.model('Application', applicationSchema);
 // });
 
 app.post('/api/companies/:companyID/applications', async (req, res) => {
+  // do we need to delete the old application record?
+  if (req.body.ifEditThenApplicationIDIs.length > 0) {
+    try {
+      let application = await Application.findOne({_id: req.body.ifEditThenApplicationIDIs, company: req.params.companyID});
+      if (!application) {
+        res.send(404);
+        return;
+      }
+      await application.delete();
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500);
+    }
+  }
   let company = await Company.findOne({ _id: req.params.companyID });
   if (!company) {
     res.send(404);
@@ -259,6 +281,7 @@ app.post('/api/companies/:companyID/applications', async (req, res) => {
 
   const application = new Application({
     company: company,
+    applicationName: req.body.applicationName,
     infoModule: req.body.infoModule,
     modules: req.body.modules
   });
@@ -276,13 +299,45 @@ app.post('/api/companies/:companyID/applications', async (req, res) => {
 
 app.get('/api/companies/:companyID/applications/:applicationID', async (req, res) => {
   try {
-    let application = await Application.findOne({ _id: req.params.applicationID, company: req.params.companyID});
+    
+    let application = await Application.findOne({ _id: req.params.applicationID, company: req.params.companyID });
+    console.log(application);
     res.send(application);
   } catch (error) {
     console.log(error);
     res.sendStatus(500);
   }
-})
+});
+
+app.delete('/api/companies/:companyID/applications/:applicationID', async (req, res) => {
+  try {
+    let application = await Application.findOne({_id:req.params.applicationID, company: req.params.companyID});
+    if (!application) {
+      res.send(404);
+      return;
+    }
+    await application.delete();
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+app.get('/api/companies/:companyID/applications', async (req, res) => {
+  try {
+    let company = await Company.findOne({ _id: req.params.companyID });
+    if (!company) {
+      res.send(404);
+      return;
+    }
+    let applications = await Application.find({ company: company });
+    res.send(applications);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
 
 
 
@@ -296,6 +351,17 @@ app.post('/api/videos', upload.single('video'), async (req, res) => {
     path: "/videos/" + req.file.filename
   });
 });
+
+app.post('/api/files', upload.single('file'), async (req, res) => {
+  if (!req.file) {
+    return res.sendStatus(400);
+  }
+
+  res.send({
+    path: "/files/" + req.file.filename
+  });
+});
+
 
 // listen on port 3000
 app.listen(3000, () => console.log('Server listening on port 3000!'));

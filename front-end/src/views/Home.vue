@@ -81,7 +81,7 @@ export default {
         });
         console.log(response);
         this.$root.$data.company = response.data.company;
-        this.$router.push({ name: "Application" });
+        this.$router.push({ name: "Launchpad" });
       } catch (error) {
         this.error = error.response.data.message;
         this.$root.$data.user = null;
@@ -95,7 +95,7 @@ export default {
           password: this.passwordLogin,
         });
         this.$root.$data.company = response.data.company;
-        this.$router.push({ name: "Application" });
+        this.$router.push({ name: "Launchpad" });
       } catch (error) {
         this.errorLogin = "Error: " + error.response.data.message;
         this.$root.$data.user = null;
