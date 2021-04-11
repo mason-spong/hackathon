@@ -1,26 +1,32 @@
 <template>
   <div class="launchpad">
-    <h2 class="company-name" v-if="company">
-      <div class="logged-in">Logged in as: {{ company.companyName }}</div>
-      <button @click="logout" class="pure-button pure-button-primary">
-        Logout
-      </button>
-    </h2>
+    <div class="company-info" v-if="company">
+      <h2 class="company-name">
+        <div class="logged-in">Logged in as: {{ company.companyName }}</div>
+        <button @click="logout" class="pure-button pure-button-primary">
+          Logout
+        </button>
+      </h2>
+    </div>
     <div
       class="application-box"
       v-for="application in this.applications"
       :key="application.id"
     >
-      <p class="application-name">{{ application.applicationName }}</p>
-      <button class="edit" @click="editApplication(application._id)">
-        Edit
-      </button>
-      <button class="delete" @click="deleteApplication(application._id)">
-        Delete
-      </button>
+      <p class="application-name">
+        Application: {{ application.applicationName }}
+      </p>
+      <div class="edit-delete-buttons">
+        <button class="edit" @click="editApplication(application._id)">
+          Edit
+        </button>
+        <button class="delete" @click="deleteApplication(application._id)">
+          Delete
+        </button>
+      </div>
       <div class="link-box">
-        <h2 class="copy-link-words">Copy this link and paste it in the application</h2>
-      <p class="shareable-link">{{ getSharableLink(application._id) }}</p>
+        <h2 class="copy-link-words">Share this link with job applicants!</h2>
+        <p class="shareable-link">{{ getSharableLink(application._id) }}</p>
       </div>
     </div>
     <div class="new-application">
@@ -32,105 +38,29 @@
 </template>
 
 <style scoped>
-  * {
-    box-sizing: border-box;
-  }
+.application-box {
+  border: 2px solid black;
+  width: fit-content;
+  padding: 20px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
 
-  .launchpad {
-    background-color: white;
-    color: #222629;
-    display: flex;
-    font-size: 3rem;
-    display: flex;
-  }
+.link-box {
+  width: fit-content;
+  padding: 20px;
+  background-color: #86c232;
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
 
-  .company-name {
-    
-    display: flex;
-    justify-content: center;
-    color: #6B6E70;
-    padding-left: 5rem;
-    padding-top: 5rem;
-  }
-
-  .logged-in {
-    padding: 2rem;
-    background-color: #86C232;
-    border-radius: 8px;
-    
-  }
-
-  .link-box {
-    background-color: #86C232;
-    color: #222629;
-    padding: 3rem;
-    border-left: 0;
-    border-radius: 8px;
-    display: flex;
-    margin-top: 10rem;
-  }
-
-  .copy-link-words {
-    display: flex;
-    align-self: center;
-  }
+.edit-delete-buttons {
+  margin-bottom: 20px;
+}
 
 .application-name {
-  font-size: 5rem;
-  color: #61892F;
-  border: 20px #6B6E70;
-  font-weight: bold;
+  font-size: 30px;
 }
-  
-  .application-box {
-    font-size: 1.5rem;
-    padding: 1rem;
-    margin: 0 1rem;
-  }
-
-.edit {
-  margin: 1rem;
-}
-
-.delete {
-  margin: 1rem;
-}
-
-.create-application {
-  margin: 1rem;
-}
-
-.pure-button {
-  justify-self: center;
-  background-color: #86C232;
-  position: absolute;
-  top: 15px;
-  padding: .5rem;
-  border-radius: 8px;
-  font-size: 2.5rem;
-  border: 1px;
-  box-shadow: 0px 0px 2px 0px;
-  transition: .3s;
-}
-  .edit, .delete, .create-application {
-    justify-self: center;
-    background-color: #86C232;
-    color: #222629;
-    padding: 1rem;
-    border-radius: 8px;
-    border: 1px;
-    font-size: 2.5rem;
-    box-shadow: 0px 0px 2px 0px;
-    transition: .3s;
-  }
-
-  .edit:hover, .delete:hover, .create-application:hover, .pure-button:hover {
-    box-shadow: 0px 10px 8px 0px grey;
-  }
-  
-
-
-
 </style>
 
 <script>
