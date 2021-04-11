@@ -22,13 +22,69 @@
       v-bind:is="comp.component"
       :moduleData="comp"
     ></component>
-    <button @click="addFreeResponseModuleEdit">Add free response</button>
-    <button @click="addMultipleChoiceModuleEdit">Add Multiple Choice</button>
-    <button @click="addCodingQuestionEdit">Add Coding Question</button>
-    <button @click="addFileUploadEdit">Add File Upload Question</button>
-    <button @click="submit">{{ submitText }}</button>
+    <button @click="addFreeResponseModuleEdit" class="pure-button">Add free response</button>
+    <button @click="addMultipleChoiceModuleEdit" class="pure-button">Add Multiple Choice</button>
+    <button @click="addCodingQuestionEdit" class="pure-button">Add Coding Question</button>
+    <button @click="addFileUploadEdit" class="pure-button">Add File Upload Question</button>
+    <button @click="submit" class="pure-button">{{ submitText }}</button>
   </div>
 </template>
+<style scoped>
+
+* {
+  box-sizing: border-box;
+}
+#nav {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 4rem;
+}
+
+.companyName {
+  font-size: 5rem;
+  color: #86C232;
+}
+
+.pure-button {
+  justify-self: center;
+  background-color: hsl(85, 59%, 48%);
+  padding: .5rem;
+  border-radius: 8px;
+  font-size: 2.5rem;
+  border: 1px;
+  box-shadow: 0px 0px 2px 0px;
+  transition: .3s;
+  margin: .5rem;
+}
+
+.pure-button1, .logout {
+  justify-self: center;
+  background-color: #86C232;
+  color: #222629;
+  padding: .5rem;
+  border: 1px;
+  border-radius: 8px;
+  font-size: 2rem;
+  margin: .5rem;
+  box-shadow: 0px 0px 2px 0px;
+  transition: .3s;
+  margin: 3rem;
+  padding: 1rem;
+}
+
+.edit:hover, .delete:hover, .create-application:hover, .pure-button1:hover, .pure-button:hover, .logout:hover {
+    box-shadow: 0px 10px 8px 0px grey;
+  }
+/*
+textarea,
+input {
+  border-radius: 8px;
+  padding: 6px;
+}*/
+
+</style>
 
 <script>
 import axios from "axios";
