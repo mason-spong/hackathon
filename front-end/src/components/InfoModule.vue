@@ -1,7 +1,7 @@
 <template>
   <div class="info-module">
     <div class="company-title">
-      <h2 class="company-edit">{{this.moduleData.companyName.length}}</h2>
+      <h2 class="company-edit">{{this.moduleData.companyName}}</h2>
     </div>
     <div class="team-title">
       <h2 class="team-edit">{{moduleData.teamName}}</h2>

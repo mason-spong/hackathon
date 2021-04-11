@@ -1,13 +1,15 @@
 <template>
-  <div class="coding-question">
-    <h1 class="title">Coding Question</h1>
-    <h2 class="question">{{moduleData.questionDescription}}</h2>
-    <prism-editor
-      class="my-editor"
-      v-model="code"
-      :highlight="highlighter"
-      line-numbers
-    ></prism-editor>
+  <div class="coding-question module-wrap">
+    <div class="module-content">
+      <h1 class="title">Coding Question</h1>
+      <h2 class="question">{{ moduleData.questionDescription }}</h2>
+      <prism-editor
+        class="my-editor"
+        v-model="code"
+        :highlight="highlighter"
+        line-numbers
+      ></prism-editor>
+    </div>
   </div>
 </template>
 
@@ -27,7 +29,7 @@ export default {
     PrismEditor,
   },
   data: () => ({
-    code: '\n\n\n\n\n\n\n\n\n',
+    code: "\n\n\n\n\n\n\n\n\n",
   }),
   methods: {
     highlighter(code) {
