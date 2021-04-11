@@ -1,7 +1,7 @@
 <template>
   <div class="application">
     <div v-if="this.app != null">
-      <info-module :moduleData="this.app.infoModule" />
+      <info-module class="info-mod" :moduleData="this.app.infoModule" />
       <component
         v-for="comp in this.app.modules"
         :key="comp.id"
@@ -56,6 +56,11 @@ h2 {
   transition: .3s;
   margin: 3rem;
   padding: 1rem;
+}
+
+.info-mod {
+  border: 2px solid black;
+  margin-bottom: 20px;
 }
 
 .edit:hover, .delete:hover, .create-application:hover, .pure-button1:hover {
