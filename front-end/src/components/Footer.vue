@@ -1,6 +1,6 @@
 <template>
 <div class="footer">
-  <a class="link" href="https://github.com/mason-spong/hackathon">My Github Repo</a>
+  <a class="link" href="https://github.com/mason-spong/hackathon">My Github Repo (21 hours spent)</a>
 </div>
 </template>
 
